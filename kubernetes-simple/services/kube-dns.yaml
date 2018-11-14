@@ -79,7 +79,7 @@ spec:
       containers:
       #实现dns解析功能
       - name: kubedns
-        image: registry.cn-hangzhou.aliyuncs.com/imooc/k8s-dns-kube-dns-amd64:1.14.5
+        image: hub.ecf-poc.com:9999/library/calico-node/k8s-dns-kube-dns-amd64:1.14.5
         resources:
           # TODO: Set memory limits when we've profiled the container for large
           # clusters, then set request = limit to keep this container in
@@ -133,7 +133,7 @@ spec:
           mountPath: /kube-dns-config
       #dnsmasq类似一个dns缓存，用于提高访问效率
       - name: dnsmasq
-        image: registry.cn-hangzhou.aliyuncs.com/imooc/k8s-dns-dnsmasq-nanny-amd64:1.14.5
+        image: hub.ecf-poc.com:9999/library/k8s-dns-dnsmasq-nanny-amd64:1.14.5
         livenessProbe:
           httpGet:
             path: /healthcheck/dnsmasq
@@ -172,7 +172,7 @@ spec:
           mountPath: /etc/k8s/dns/dnsmasq-nanny
       #sidecar是一个监控功能，负责监控另外两个容器的运行
       - name: sidecar
-        image: registry.cn-hangzhou.aliyuncs.com/imooc/k8s-dns-sidecar-amd64:1.14.5
+        image: hub.ecf-poc.com:9999/library/k8s-dns-sidecar-amd64:1.14.5
         livenessProbe:
           httpGet:
             path: /metrics
